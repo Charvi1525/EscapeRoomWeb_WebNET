@@ -1,0 +1,32 @@
+@page
+@model GameModel
+@{ ViewData["Title"]="Play"; }
+@if (!Model.IsLoggedIn) {
+<div class="notice">Please log in before starting the challenge.</div>
+} else if (Model.Completed) {
+<section class="result-box">
+<p class="eyebrow">Challenge complete</p>
+<h1>You reached the final gate.</h1>
+<p>Your score: <strong>@Model.Score</strong></p>
+<p>Time: <strong>@Model.SecondsTaken seconds</strong></p>
+<p>Attempts: <strong>@Model.Attempts</strong></p>
+<a class="button" asp-page="/Leaderboard">View leaderboard</a>
+</section>
+} else {
+<section class="game">
+<div class="game-head"><div><p class="eyebrow">Room @Model.RoomNumber of @Model.TotalRooms</p><h1>@Model.Puzzle?.RoomTitle</h1></div><div class="timer" id="timer">00:00</div></div>
+<div class="story"><p>@Model.Puzzle?.Story</p><div class="clue"><span>Clue</span><p>@Model.Puzzle?.Clue</p></div><p><strong>Question:</strong> @Model.Puzzle?.Question</p></div>
+@if (!string.IsNullOrWhiteSpace(Model.Message)) { <div class="notice">@Model.Message</div> }
+<form method="post" class="answer-form">
+<label for="answer">Your answer</label>
+<input id="answer" name="Answer" autocomplete="off" placeholder="Enter the answer" required />
+<button class="button" type="submit">Check answer</button>
+</form>
+</section>
+<script>
+const start=@Model.StartUnixMilliseconds;
+const timer=document.getElementById("timer");
+function updateTimer(){const s=Math.max(0,Math.floor((Date.now()-start)/1000));timer.textContent=String(Math.floor(s/60)).padStart(2,'0')+":"+String(s%60).padStart(2,'0');}
+updateTimer();setInterval(updateTimer,1000);
+</script>
+}

@@ -1,0 +1,12 @@
+@page
+@model LeaderboardModel
+@{ ViewData["Title"]="Leaderboard"; }
+<div class="section-head"><p class="eyebrow">Top attempts</p><h1>Leaderboard</h1></div>
+<table class="table">
+<thead><tr><th>Player</th><th>Score</th><th>Time</th><th>Attempts</th></tr></thead>
+<tbody>
+@foreach(var item in Model.Results) {
+<tr><td>@item.User?.Name</td><td>@item.Score</td><td>@item.SecondsTaken sec</td><td>@item.Attempts</td></tr>
+}
+</tbody>
+</table>

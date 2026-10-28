@@ -1,0 +1,13 @@
+@page
+@model LoginModel
+@{ ViewData["Title"]="Login"; }
+<div class="form-card">
+<p class="eyebrow">Player access</p><h1>Login</h1>
+@if(!string.IsNullOrEmpty(Model.Message)){<div class="notice">@Model.Message</div>}
+<form method="post">
+<label>Email</label><input asp-for="Email" type="email" required />
+<label>Password</label><input asp-for="Password" type="password" required />
+<button class="button" type="submit">Login</button>
+</form>
+<p class="small">New player? <a asp-page="/Account/Register">Create an account</a></p>
+</div>

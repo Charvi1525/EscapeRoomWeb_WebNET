@@ -1,0 +1,14 @@
+@page
+@model RegisterModel
+@{ ViewData["Title"]="Register"; }
+<div class="form-card">
+<p class="eyebrow">New player</p><h1>Create an account</h1>
+@if(!string.IsNullOrEmpty(Model.Message)){<div class="notice">@Model.Message</div>}
+<form method="post">
+<label>Name</label><input asp-for="Name" placeholder="For example: Kavya" required />
+<label>Email</label><input asp-for="Email" type="email" required />
+<label>Password</label><input asp-for="Password" type="password" minlength="6" required />
+<button class="button" type="submit">Register</button>
+</form>
+<p class="small">Already registered? <a asp-page="/Account/Login">Login</a></p>
+</div>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>@ViewData["Title"] - Escape Room Challenge</title>
+<link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Escape Room Challenge</div>
+  <nav>
+    <a asp-page="/Index">Home</a>
+    <a asp-page="/Leaderboard">Leaderboard</a>
+    @if (Context.Session.GetInt32("UserId") != null) {
+      <a asp-page="/Game">Play</a><a asp-page="/Account/Logout">Logout</a>
+    } else { <a asp-page="/Account/Login">Login</a> }
+  </nav>
+</header>
+<main class="page">@RenderBody()</main>
+<footer class="footer">Web.NET project • ASP.NET Core • C#</footer>
+</body>
+</html>
